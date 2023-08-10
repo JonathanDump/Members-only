@@ -1,0 +1,53 @@
+<div class="signUpContainer">
+  <form action="" method="POST">
+    <div class="inputContainer">
+      <label for="name">Name*</label>
+      <input
+        type="text"
+        name="name"
+        required
+        value="<%= user ? user.name : ''%>"
+      />
+    </div>
+    <div class="inputContainer">
+      <label for="lastName">Last name*</label>
+      <input
+        type="text"
+        name="lastName"
+        required
+        value="<%= user ? user.lastName : ''%>"
+      />
+    </div>
+    <div class="inputContainer">
+      <label for="email">Email*</label>
+      <input
+        type="email"
+        name="email"
+        required
+        value="<%= user ? user.email : ''%>"
+      />
+      <div class="inputErrors">
+        <%if(errors) {%> <%= errors.find((err) => err.path === 'email')?.msg %>
+        <%}%>
+      </div>
+    </div>
+    <div class="inputContainer">
+      <label for="password">Password*</label>
+      <input
+        type="password"
+        name="password"
+        required
+        value="<%= user ? user.password : ''%>"
+      />
+      <div class="inputErrors">
+        <%if(errors) {%> <%= errors.find((err) => err.path === 'password')?.msg
+        %> <%}%>
+      </div>
+    </div>
+    <div class="inputContainer">
+      <label for="passwordCheck">Confirm password*</label>
+      <input type="password" required name="passwordCheck" />
+    </div>
+    <button>Register</button>
+  </form>
+</div>
