@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const User = require("../models/user");
-var bcrypt = require("bcryptjs");
+var bcrypt = require("bcrypt");
 
 exports.signUpPost = [
   body("name", "Name must not be empty").trim().isLength({ min: 1 }).escape(),
@@ -12,6 +12,12 @@ exports.signUpPost = [
   body("email", "Email name must not be empty")
     .isEmail()
     .withMessage("Invalid email. Email must look like this qwe@asd.zxc")
+    .custom(async (value) => {
+      if (await User.findOne({ email: value })) {
+        throw new Error("This email is already registered");
+      }
+      return true;
+    })
     .escape(),
   body("password")
     .isLength({ min: 8 })
@@ -47,6 +53,7 @@ exports.signUpPost = [
         }
         user.password = hashedPassword;
         console.log("hashedPassword", hashedPassword);
+        console.log("hashedPasswordLen", hashedPassword.length);
         await user.save();
         res.redirect("/registered");
       });
