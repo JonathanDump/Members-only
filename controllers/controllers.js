@@ -47,7 +47,7 @@ exports.signUpPost = [
         errors: errors.errors,
       });
     } else {
-      bcrypt.hash("password", 10, async (err, hashedPassword) => {
+      bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
         if (err) {
           return next(err);
         }
