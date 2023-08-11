@@ -1,11 +1,23 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<div class="postList">
+  <%if(posts.length) {%> <%for (const post of posts){%>
+  <div class="postContainer">
+    <div class="title"><%=post.title%></div>
+    <div class="text"><%=post.text%></div>
+
+    <div class="additionals">
+      <%if(currentUser.isMember || currentUser.isAdmin ) {%>
+      <div class="date"><%=post.formattedDate%></div>
+      <div class="userName"><%= post.user.fullName%></div>
+      <%}%>
+    </div>
+    <%if(currentUser.isAdmin ) {%>
+    <form action="" method="post">
+      <input type="hidden" value="<%= post._id%>" name="postID" />
+      <button class="deleteButton">X</button>
+    </form>
+    <%}%>
+  </div>
+  <%}%> <%} else {%>
+  <h1>No posts yet</h1>
+  <%}%>
+</div>

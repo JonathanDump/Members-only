@@ -5,6 +5,16 @@ const Post = require("../models/post");
 
 var bcrypt = require("bcrypt");
 
+exports.indexPostList = asyncHandler(async (req, res, next) => {
+  const posts = await Post.find().populate("user");
+  res.render("index", { posts });
+});
+
+exports.indexPostDelete = asyncHandler(async (req, res, next) => {
+  await Post.findByIdAndRemove(req.body.postID);
+  res.redirect("/");
+});
+
 exports.signUpPost = [
   body("name", "Name must not be empty").trim().isLength({ min: 1 }).escape(),
   body("lastName", "Last name must not be empty")

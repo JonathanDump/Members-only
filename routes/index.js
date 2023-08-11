@@ -4,9 +4,8 @@ const controllers = require("../controllers/controllers");
 const passport = require("passport");
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
-});
+router.get("/", controllers.indexPostList);
+router.post("/", controllers.indexPostDelete);
 
 router.get("/sign-up", (req, res, next) =>
   res.render("sign-up-form", { user: null, errors: null })

@@ -14,7 +14,7 @@ const UserSchema = new Schema(
   { collection: "users" }
 );
 
-UserSchema.virtual("url").get(function () {
+UserSchema.virtual("fullName").get(function () {
   return `${this.name} ${this.lastName}`;
 });
 
