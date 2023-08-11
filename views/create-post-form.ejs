@@ -1,0 +1,29 @@
+<div class="formContainer">
+  <h2>Create a post</h2>
+  <form action="" method="post">
+    <div class="inputContainer">
+      <label for="title"></label>
+      <input
+        id="title"
+        type="text"
+        name="title"
+        placeholder="Title"
+        value="<%= typeof post === 'undefined' ? '' : post?.title %>"
+      />
+    </div>
+    <div class="inputContainer">
+      <label for="text"></label>
+      <textarea
+        id="text"
+        type="text"
+        name="text"
+        maxlength="300"
+        placeholder="Say something"
+        rows="5"
+        cols="33"
+        value="<%= typeof post === 'undefined' ? '' : post?.text %>"
+      ></textarea>
+    </div>
+    <button>Submit</button>
+  </form>
+</div>

@@ -1,6 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const User = require("../models/user");
+const Post = require("../models/post");
+
 var bcrypt = require("bcrypt");
 
 exports.signUpPost = [
@@ -74,3 +76,43 @@ exports.becomeAMemberPost = asyncHandler(async (req, res, next) => {
     res.render("become-a-member", { message: "Invalid code" });
   }
 });
+
+exports.createPostPost = [
+  body("title").optional().escape(),
+  body("text")
+    .trim()
+    .isLength({ min: 1 })
+    .isLength({ max: 300 })
+    .withMessage("Maximum symbols allowed 300")
+    .escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    console.log("errors", errors);
+
+    const post = new Post({
+      title: req.body.title,
+      text: req.body.text,
+      date: Date.now(),
+      user: req.user._id,
+    });
+
+    console.log("post", post);
+
+    if (!errors.isEmpty()) {
+      console.log("rerender");
+      res.render("create-post-form", {
+        post,
+        errors: errors.errors,
+      });
+    } else {
+      console.log("saving post");
+      await post.save();
+
+      const user = await User.findById(req.user._id, "posts");
+      user.posts.push(post._id);
+      await user.save();
+      res.redirect("/");
+    }
+  }),
+];

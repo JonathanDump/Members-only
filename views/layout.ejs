@@ -8,6 +8,9 @@
   <body>
     <header class="header">
       <div class="logo">Members only</div>
+      <% if(typeof currentUser !== 'undefined') {%>
+      <a href="/create-post">Create post</a>
+      <%}%>
       <div class="buttonsContainer">
         <% if(typeof currentUser === 'undefined') {%>
         <a href="/sign-up">Sign up</a>

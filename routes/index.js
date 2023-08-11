@@ -50,4 +50,7 @@ router.get("/log-out", (req, res, next) => {
   });
 });
 
+router.get("/create-post", (req, res, next) => res.render("create-post-form"));
+router.post("/create-post", controllers.createPostPost);
+
 module.exports = router;
