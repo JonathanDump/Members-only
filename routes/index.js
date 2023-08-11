@@ -19,13 +19,21 @@ router.get("/log-in", (req, res, next) =>
   res.render("log-in-form", { errors: null })
 );
 
-router.post(
-  "/log-in",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/log-in",
-    failureMessage: true,
-  })
-);
+router.post("/log-in", (req, res, next) => {
+  passport.authenticate("local", (err, user, message) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.render("log-in-form", { errors: message });
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect("/");
+    });
+  })(req, res);
+});
 
 module.exports = router;
