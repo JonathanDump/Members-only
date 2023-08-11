@@ -60,3 +60,17 @@ exports.signUpPost = [
     }
   }),
 ];
+
+exports.becomeAMemberPost = asyncHandler(async (req, res, next) => {
+  console.log("code", req.body.code);
+  console.log("currentUser", req.user);
+  if (req.body.code === "00001111") {
+    req.user.isMember = true;
+    console.log("currentUser", req.user);
+    const user = await User.findByIdAndUpdate(req.user._id, req.user);
+    await user.save();
+    res.redirect("/");
+  } else {
+    res.render("become-a-member", { message: "Invalid code" });
+  }
+});

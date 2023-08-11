@@ -7,8 +7,8 @@ const UserSchema = new Schema(
     lastName: { type: String, required: true, minLength: 1, maxLength: 100 },
     email: { type: String, required: true, minLength: 1, maxLength: 100 },
     password: { type: String, required: true, minLength: 8 },
-    isMember: { type: Boolean },
-    isAdmin: { type: Boolean },
+    isMember: { type: Boolean, default: false },
+    isAdmin: { type: Boolean, default: false },
     posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
   },
   { collection: "users" }

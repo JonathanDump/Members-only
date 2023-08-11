@@ -36,4 +36,10 @@ router.post("/log-in", (req, res, next) => {
   })(req, res);
 });
 
+router.get("/become-a-member", (req, res, next) =>
+  res.render("become-a-member")
+);
+
+router.post("/become-a-member", controllers.becomeAMemberPost);
+
 module.exports = router;
