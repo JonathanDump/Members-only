@@ -12,8 +12,9 @@
         <% if(typeof currentUser === 'undefined') {%>
         <a href="/sign-up">Sign up</a>
         <a href="/log-in">Log in</a>
-        <%} else {%>
+        <%} else {%> <%if(!currentUser.isMember) {%>
         <a href="/become-a-member">Become a member</a>
+        <%}%>
         <a href="/log-out">Log out</a>
         <%}%>
       </div>

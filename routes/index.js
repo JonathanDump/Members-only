@@ -39,7 +39,15 @@ router.post("/log-in", (req, res, next) => {
 router.get("/become-a-member", (req, res, next) =>
   res.render("become-a-member")
 );
-
 router.post("/become-a-member", controllers.becomeAMemberPost);
+
+router.get("/log-out", (req, res, next) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
 
 module.exports = router;
