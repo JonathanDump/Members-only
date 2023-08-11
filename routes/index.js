@@ -12,7 +12,7 @@ router.get("/sign-up", (req, res, next) =>
 );
 router.post("/sign-up", controllers.signUpPost);
 
-router.get("/registered", (req, res, next) => res.render("registeredTEMP"));
+router.get("/registered", (req, res, next) => res.redirect("log-in"));
 
 router.get("/log-in", (req, res, next) =>
   res.render("log-in-form", { errors: null })

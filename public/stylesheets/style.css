@@ -1,8 +1,127 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "DM Sans", sans-serif;
+  background-color: rgba(0, 0, 0, 0.06);
+  height: 100vh;
 }
 
-a {
-  color: #00B7FF;
+.header {
+  display: flex;
+  padding: 16px 32px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  gap: 32px;
+  top: 0;
+  position: sticky;
+}
+
+.logo {
+  font-size: 24px;
+  text-decoration: none;
+}
+.logo:visited,
+.button:visited {
+  color: black;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 32px;
+}
+
+.button {
+  text-decoration: none;
+  background-color: rgba(128, 128, 128, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all ease 0.15s;
+  border-radius: 16px;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: rgba(128, 128, 128, 0.35);
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+}
+
+.postList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 32px;
+}
+
+.postContainer,
+.formContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 16px;
+  background-color: rgba(128, 128, 128, 0.15);
+  /* border: 1px solid black; */
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  gap: 16px;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.additionals {
+  display: flex;
+  justify-content: space-between;
+}
+
+.deleteButtonForm {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+}
+
+.deleteButton {
+  appearance: none;
+  font-size: 24px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.inputContainer {
+  display: flex;
+}
+
+input,
+textarea {
+  appearance: none;
+  border: none;
+
+  /* line-height: 1.6rem; */
+  margin-bottom: 16px;
+  border-radius: 16px;
+  padding: 8px;
+  resize: none;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
 }

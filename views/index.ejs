@@ -1,19 +1,25 @@
 <div class="postList">
-  <%if(posts.length) {%> <%for (const post of posts){%>
+  <% if(typeof currentUser !== 'undefined') {%>
+  <a href="/create-post" class="button">Create post</a>
+  <%}%> <%if(posts.length) {%> <%for (const post of posts){%>
   <div class="postContainer">
-    <div class="title"><%=post.title%></div>
-    <div class="text"><%=post.text%></div>
+    <div class="info">
+      <div class="title"><%=post.title%></div>
+      <div class="text"><%=post.text%></div>
+    </div>
 
     <div class="additionals">
-      <%if(currentUser.isMember || currentUser.isAdmin ) {%>
+      <%if(typeof currentUser !== 'undefined' && (currentUser.isMember ||
+      currentUser.isAdmin) ) {%>
+      <div class="userName">By: <%= post.user.fullName%></div>
       <div class="date"><%=post.formattedDate%></div>
-      <div class="userName"><%= post.user.fullName%></div>
+
       <%}%>
     </div>
-    <%if(currentUser.isAdmin ) {%>
-    <form action="" method="post">
+    <%if(typeof currentUser !== 'undefined' && currentUser.isAdmin ) {%>
+    <form action="" method="post" class="deleteButtonForm">
       <input type="hidden" value="<%= post._id%>" name="postID" />
-      <button class="deleteButton">X</button>
+      <button class="deleteButton">×</button>
     </form>
     <%}%>
   </div>
